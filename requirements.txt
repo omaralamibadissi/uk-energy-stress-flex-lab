@@ -21,3 +21,6 @@ six==1.17.0
 tzdata==2025.3
 urllib3==1.26.20
 zipp==3.23.0
+scikit-learn
+streamlit
+

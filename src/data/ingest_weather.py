@@ -11,5 +11,5 @@ def run(start_date: str, end_date: str) -> Path:
     return out
 
 if __name__ == "__main__":
-    path = run("2026-01-01", "2026-01-15")
+    path = run("2025-10-01", "2026-01-15")
     print("Saved:", path)
