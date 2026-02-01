@@ -2,12 +2,10 @@
 
 A compact, end-to-end project inspired by UK power & gas trading workflows: build an interpretable **UK system stress proxy** from public data (carbon intensity + weather), then train a **spike-risk model** to estimate the probability of an extreme regime within a chosen horizon (3h/6h/12h). A Streamlit dashboard turns it into a practical **early-warning monitor**.
 
-> **Why this matters for commodities trading**  
-> Short-horizon stress regimes in the UK power system are often driven by physical fundamentals (cold demand, low wind supply). This project turns those drivers into a monitoring signal and an actionable alert rule.
 
 ---
 
-## What you built
+## What I built
 
 ### Data sources (public)
 - **UK Carbon Intensity API**: half-hourly national carbon intensity (proxy for generation mix / system tightness).
@@ -210,19 +208,6 @@ The dashboard:
 
 ---
 
-## Next extensions (commodities-level upgrades)
-
-1. Replace proxy target with a **real market target**
-
-   * UK imbalance/system price spikes (BMRS/Elexon)
-2. Add more fundamentals
-
-   * demand forecasts, wind forecast, interconnector flows, outages, storage levels
-3. Add proper "trading" backtest
-
-   * define exposure rules and evaluate impact under transaction-cost assumptions
-
----
 
 ## License
 
