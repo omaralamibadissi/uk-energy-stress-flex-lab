@@ -1,4 +1,4 @@
-# src/data/elexon_system_prices.py
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -9,7 +9,7 @@ import pandas as pd
 RAW_DIR = Path("data/raw")
 RAW_DIR.mkdir(parents=True, exist_ok=True)
 
-# IMPORTANT: use the data host (Insights Solution APIs)
+
 BASE = "https://data.elexon.co.uk/bmrs/api/v1"
 
 SESSION = requests.Session()
@@ -27,7 +27,7 @@ def _get_json(url: str, retries: int = 5, backoff: float = 1.0) -> dict:
     for k in range(retries):
         try:
             r = SESSION.get(url, timeout=30)
-            # Sometimes APIs return HTML error pages. Check early.
+
             ctype = (r.headers.get("Content-Type") or "").lower()
 
             if r.status_code >= 400:
@@ -55,7 +55,6 @@ def fetch_system_prices_day(settlement_date: str) -> pd.DataFrame:
     url = f"{BASE}/balancing/settlement/system-prices/{settlement_date}"
     js = _get_json(url)
 
-    # Typical shape: {"data":[...]}
     data = js.get("data", js)
     if isinstance(data, dict):
         data = [data]
@@ -64,12 +63,9 @@ def fetch_system_prices_day(settlement_date: str) -> pd.DataFrame:
     if df.empty:
         return df
 
-    # Ensure these exist for later merge
     if "settlementDate" not in df.columns:
         df["settlementDate"] = settlement_date
 
-    # Some APIs use "settlementPeriod", some use "settlementPeriodId" etc.
-    # Keep it flexible but ensure settlementPeriod is present if possible.
     if "settlementPeriod" not in df.columns:
         for alt in ["settlementPeriodId", "settlementperiod", "period"]:
             if alt in df.columns:
@@ -89,7 +85,6 @@ def run(start_date: str, end_date: str) -> Path:
         print(f"Fetching {i}/{len(days)}: {ds}")
         df = fetch_system_prices_day(ds)
 
-        # small pause to be polite
         time.sleep(0.15)
 
         if df is not None and not df.empty:
