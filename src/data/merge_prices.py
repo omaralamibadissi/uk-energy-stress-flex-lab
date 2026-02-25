@@ -68,7 +68,6 @@ def run() -> Path:
     ]
     prices["from"] = pd.to_datetime(prices["from"], utc=True)
 
-    # Pick columns (names can differ slightly by endpoint; keep what exists)
     cols = ["from"]
     for c in ["systemBuyPrice", "systemSellPrice", "sbp", "ssp"]:
         if c in prices.columns:
