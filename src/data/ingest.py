@@ -34,7 +34,6 @@ def run_chunked(start_iso: str, end_iso: str, chunk_days: int = 7) -> Path:
         df = fetch_carbon_intensity(a_iso, b_iso)
         parts.append(df)
 
-        # Small sleep to be polite with API
         time.sleep(0.2)
 
     out_df = pd.concat(parts, ignore_index=True).drop_duplicates(subset=["from", "to"]).sort_values("from")
